@@ -1,0 +1,14 @@
+<h1>linfo</h1>
+<h3>詳細</h3>
+<div class="link">
+  <p><%= @link.url %></p>
+  <p><%= @link.title %></p>
+  <p><%= @link.memo %></p>
+  <p><%= @link.created_at %></p>
+  <% @link.tags.each do |tag| %>
+    <span><%= tag.tname %></span>
+  <% end %>
+</div>
+
+<%= link_to "編集する", edit_link_path(@link.id) %>
+<%= link_to "一覧に戻る", links_path %>

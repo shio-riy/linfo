@@ -1,0 +1,42 @@
+<h1>linfo</h1>
+<h3>新規保存</h3>
+<%= form_for @link do |f| %>
+
+  <div class="field">
+    <%= f.label :保存するURL %>
+    <%= f.text_field :url, :size => 30 %>
+  </div>
+
+   <div class="field">
+    <%= f.label :保存先  %>
+    <%= f.select :folder_id, 
+    [["選択肢１", "選択肢１"], 
+    ["選択肢２", "選択肢２"], 
+    ["選択肢３", "選択肢３"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title, :size => 30 %>
+  </div>
+
+   <div class="field">
+    <%= f.label :メモ  %>
+    <%= f.text_area :memo, :size => "30x2" %>
+  </div>
+
+   <div class='form-group'>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tname) do |tag| %>
+            <div class='form-check'>
+                <%= tag.label class: 'form-check-label' do %>
+                    <%= tag.check_box class: 'form-check-input' %>
+                    <%= tag.text %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+
+    <%= f.submit "保存する" %>
+<% end %>
+
+<%= link_to "一覧に戻る", links_path %>

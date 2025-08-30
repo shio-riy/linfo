@@ -1,0 +1,41 @@
+<h1>linfo</h1>
+
+<h3>一覧ページ</h3>
+
+<h4>タイトル・メモから検索</h4>
+ <%= form_tag({controller:"links",action:"index"}, method: :get) do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag '検索する'  %>
+<% end %>
+
+
+<h4>タグで絞り込み</h4>
+ <% Tag.all.each do |t| %>
+     <li>
+      <%= check_box_tag "tag_ids[]", t.id %>
+      <%= t.tname %>
+    </li>
+   <% end %>
+
+<%= form_tag({controller:"links",action:"index"}, method: :get) do %>
+    <%= text_field_tag :tag %>
+    <%= submit_tag 'タグを追加' %>
+<% end %>
+
+<%= link_to "新規保存へ", new_link_path %>
+
+<div class="links-container">
+  <% @links.each do |t| %>
+    <div class="links">
+      <%= t.folder_id %>
+      <%= t.url %>
+      <%= t.title %>
+      <%= t.memo %>
+    </div>
+    <div style="display: flex; gap: 10px;"> 
+      <%= button_to "詳細へ", link_path(t.id), method: :get %>
+      <%= button_to "編集する", edit_link_path(t.id), method: :get %>
+      <%= button_to "削除する", link_path(t.id), method: :delete %>
+    </div>
+  <% end %>
+</div>

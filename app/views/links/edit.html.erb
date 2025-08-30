@@ -1,0 +1,18 @@
+<%= form_for @link do |f| %>
+  <%= f.label :編集ページ %>
+  <%= f.text_field :url, :size => 140 %> 
+  <%= f.text_field :title, :size => 140 %> 
+  <%= f.text_field :memo, :size => 140 %> 
+  <div class='form-group'>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tname) do |tag| %>
+      <div class='form-check'>
+       <%= tag.label class: 'form-check-label' do %>
+       <%= tag.check_box class: 'form-check-input' %>
+       <%= tag.text %>
+       <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= f.submit "保存する" %>
+<% end %>
